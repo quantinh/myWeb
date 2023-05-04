@@ -1,0 +1,23 @@
+% layout 'data';
+% title 'Data page';
+<h1 class="text-success">Connect database postgres success !</h1>
+<table id="customers">
+  <tr>
+    <th>customer_id</th>
+    <th>first_name</th>
+    <th>last_name</th>
+    <th>email</th>
+  </tr>
+  <% foreach my $row (@$rows) { %>
+    <tr>
+      <td><%= $row->{'customer_id'} %></td>
+      <td><%= $row->{'first_name'} %></td>
+      <td><%= $row->{'last_name'} %></td>
+      <td><%= $row->{'email'} %></td>
+    </tr>
+  <% } %>
+</table>
+
+
+
+
