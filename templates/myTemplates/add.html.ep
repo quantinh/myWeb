@@ -1,0 +1,23 @@
+% layout 'data';
+% title 'Data page';
+<h1 class="text-success heading-success">Add user</h1>
+<form method="post" action="/add">
+  <label>Customer_id:</label>
+  <input type="number" id="customer_id">
+  <br>
+  <label>Email:</label>
+  <input type="email" id="email">
+  <br>
+  <label>first_name:</label>
+  <input type="text" id="first_name">
+  <br>
+  <label>last_name:</label>
+  <input type="text" id="last_name">  
+  <br>
+  <input type="submit" value="Add customer">
+</form>
+
+
+
+
+

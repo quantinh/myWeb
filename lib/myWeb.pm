@@ -24,8 +24,17 @@ sub startup {
   # Định tuyến router đến controller file CustomController.pm action displayLogin
   $r->get('/')->to('CustomController#displayLogin');
   
-  # Định tuyến router đến controller file CustomController.pm action displayLogin
+  # Định tuyến router đến controller file CustomController.pm action show
   $r->get('/show')->to('CustomController#show');
+
+  # Định tuyến router đến controller file CustomController.pm action add
+  $r->post('/add_user')->to('CustomController#add');
+  
+  # Định tuyến router đến controller file CustomController.pm action update
+  $r->any('/update')->to('CustomController#update');
+  
+  # Định tuyến router đến controller file CustomController.pm action delete
+  $r->any('/delete')->to('CustomController#delete');
   
   # Định tuyến router đến controller file CustomController.pm action validUserCheck
   $r->post('/login')->to('CustomController#validUserCheck');

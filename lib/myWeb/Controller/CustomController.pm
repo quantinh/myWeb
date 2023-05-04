@@ -18,8 +18,7 @@ sub welcome ($self) {
   );
 }
 # Action hiển thị login render dữ liệu ra template
-sub displayLogin {
-  my $self = shift;
+sub displayLogin($self) {
   if(&alreadyLoggedIn($self)) {
     &welcome($self);
   } else {
@@ -30,14 +29,13 @@ sub displayLogin {
   }
 }
 # Action validate dữ liệu user
-sub validUserCheck {
-    my $self = shift;
+sub validUserCheck($self) {
     my %validUsers = (
-            'JANE' => 'welcome123',
-            'JILL' => 'welcome234',
-            'TOM'  => 'welcome345',
-            'RAJ'  => 'test123',
-            'RAM'  => 'digitalocean123',
+      'JANE' => 'welcome123',
+      'JILL' => 'welcome234',
+      'TOM'  => 'welcome345',
+      'RAJ'  => 'test123',
+      'RAM'  => 'digitalocean123',
     );
     my $user = uc $self->param('username');
     my $password = $self->param('pass');
@@ -49,20 +47,19 @@ sub validUserCheck {
         &welcome($self);
       } else {
         $self->render(
-          template => "myTemplates/login", 
+          template      => "myTemplates/login", 
           error_message => "InvalPassword, please try again"
         );
       }
     } else {
         $self->render(
-          template => "myTemplates/login", 
+          template      => "myTemplates/login", 
           error_message => "Your are not a registered user, please get the hell out of here"
         );
     }
 }
 # Action login
-sub alreadyLoggedIn {
-  my $self = shift;
+sub alreadyLoggedIn($self) {
   return 1 if $self->session('is_auth');
   $self->render(
     template => "myTemplates/login", 
@@ -71,8 +68,7 @@ sub alreadyLoggedIn {
   return;
 }
 # Action logout
-sub logout {
-  my $self = shift;
+sub logout($self) {
   $self->session(expires => 1);
   $self->render(
     template => "myTemplates/logout"
@@ -80,8 +76,7 @@ sub logout {
   return;
 }
 # Action showData
-sub show {
-  my $self      = shift;
+sub show($self) {
   my $driver    = "Pg"; 
   my $database  = "learning-perl";
   my $dsn       = "DBI:Pg:dbname = learning-perl; host = localhost; port = 5432";
@@ -105,7 +100,8 @@ sub show {
   if($rv < 0) {
     print $DBI::errstr;
   }
-  
+
+  # Hiển thị dữ liệu đã lấy được từ postgres
   # while(my @row = $sth->fetchrow_array()) {
   #   print "ID        :".  $row[0] ."\n";
   #   print "FIRSTNAME :".  $row[1] ."\n";
@@ -113,6 +109,7 @@ sub show {
   #   print "EMAIL     :".  $row[3] ."\n";
   # }
 
+  # Cách truyền dữ liệu dạng text
   # my $output ='';
   # my $data = +[];
   #   $_ = encode_entities(scalar <>);
@@ -124,11 +121,8 @@ sub show {
   #     #Đẩy mảng dữ liệu vừa loop qua vào mảng khởi tạo
   #     push @{$data}, @row;
   #   }
-
   # Chuyển đổi chuỗi text thành dạng html nguyên bản
-  
   # encode_entities($output);
-  
   # my $source = encode_entities(decode ('utf-8', $output));
 
   print "Operation done successfully\n";
@@ -139,9 +133,14 @@ sub show {
   $sth->finish();
   $dbh->disconnect();
   $self->render(
-    rows => \@rows,
-    template => "myTemplates/data"
+    rows      => \@rows,
+    template  => "myTemplates/data"
   );
+  return;
+}
+# Action addData
+sub add_user {
+
   return;
 }
 1;
