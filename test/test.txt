@@ -1,0 +1,47 @@
+# Test dữ liệu hiển thị lên terminal
+# while(my @row = $sth->fetchrow_array()) {
+#   print "ID        :".  $row[0] ."\n";
+#   print "FIRSTNAME :".  $row[1] ."\n";
+#   print "LASTNAME  :".  $row[2] ."\n";
+#   print "EMAIL     :".  $row[3] ."\n";
+# }
+
+INSERT INTO customer 
+(
+      customer_id, 
+      store_id, 
+      first_name, 
+      last_name, 
+      email, 
+      address_id, 
+      activebool, 
+      create_date, 
+      last_update, 
+      active
+) 
+VALUES 
+(     
+      601, 
+      2, 
+      'van a', 
+      'nguyen', 
+      'vana@gmail.com', 
+      298, 
+      true, 
+      '2021-02-04', 
+      '2022-02-04', 
+      1
+);
+
+INSERT INTO actor
+(
+	actor_id,
+	first_name,
+	last_name,
+	last_update
+)VALUES(
+	201,
+	'nguyen van',
+	'a',
+	'2021-02-04'
+);

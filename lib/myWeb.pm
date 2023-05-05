@@ -28,7 +28,7 @@ sub startup {
   $r->get('/show')->to('CustomController#show');
 
   # Định tuyến router đến controller file CustomController.pm action add
-  $r->post('/add_user')->to('CustomController#add');
+  $r->post('/add')->to('CustomController#add');
   
   # Định tuyến router đến controller file CustomController.pm action update
   $r->any('/update')->to('CustomController#update');

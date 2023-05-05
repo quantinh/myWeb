@@ -83,48 +83,21 @@ sub show($self) {
   my $userid    = "postgres";
   my $password  = "123456";
   my $dbh       = DBI->connect($dsn, $userid, $password, { RaiseError => 1 }) or die $DBI::errstr;
-  print "Opened database successfully\n";
-  my $query = qq(
-    SELECT 
-    customer_id, 
-    first_name, 
-    last_name,
-    email  
-    from 
-    customer 
-    limit 3;
+  print "Connect database successfully\n";
+  my $query = 
+  qq(
+    SELECT *
+    FROM
+    actor;
   );
+  # Thực hiện câu query trên
   my $sth = $dbh->prepare($query);
+  # Hiển thị lỗi nếu sai 
   my $rv = $sth->execute() or die $DBI::errstr;
   # Hiển thị số phần tử lấy ra 
   if($rv < 0) {
     print $DBI::errstr;
   }
-
-  # Hiển thị dữ liệu đã lấy được từ postgres
-  # while(my @row = $sth->fetchrow_array()) {
-  #   print "ID        :".  $row[0] ."\n";
-  #   print "FIRSTNAME :".  $row[1] ."\n";
-  #   print "LASTNAME  :".  $row[2] ."\n";
-  #   print "EMAIL     :".  $row[3] ."\n";
-  # }
-
-  # Cách truyền dữ liệu dạng text
-  # my $output ='';
-  # my $data = +[];
-  #   $_ = encode_entities(scalar <>);
-  #   while(my @row = $sth->fetchrow_array()) {
-  #       $output .= $row[0];
-  #       $output .= $row[1];
-  #       $output .= $row[2];
-  #       $output .= $row[3];
-  #     #Đẩy mảng dữ liệu vừa loop qua vào mảng khởi tạo
-  #     push @{$data}, @row;
-  #   }
-  # Chuyển đổi chuỗi text thành dạng html nguyên bản
-  # encode_entities($output);
-  # my $source = encode_entities(decode ('utf-8', $output));
-
   print "Operation done successfully\n";
   my @rows;
   while (my $row = $sth->fetchrow_hashref) {
@@ -134,13 +107,40 @@ sub show($self) {
   $dbh->disconnect();
   $self->render(
     rows      => \@rows,
-    template  => "myTemplates/data"
+    template  => "myTemplates/list"
   );
   return;
 }
 # Action addData
-sub add_user {
-
+sub add($self) {
+  my $driver    = "Pg"; 
+  my $database  = "learning-perl";
+  my $dsn       = "DBI:Pg:dbname = learning-perl; host = localhost; port = 5432";
+  my $userid    = "postgres";
+  my $password  = "123456";
+  my $dbh       = DBI->connect($dsn, $userid, $password, { RaiseError => 1 }) or die $DBI::errstr;
+  print "Connect database successfully\n";
+  my $query = 
+  qq(
+    SELECT *
+    FROM
+    actor;
+  );
+  # Thực hiện câu query trên
+  my $sth = $dbh->prepare($query);
+  # Hiển thị lỗi nếu sai 
+  my $rv = $sth->execute() or die $DBI::errstr;
+  # Hiển thị số phần tử lấy ra 
+  if($rv < 0) {
+    print $DBI::errstr;
+  }
+  print "Operation done successfully\n";
+  $sth->finish();
+  $dbh->disconnect();
+  $self->render(
+    rows      => '',
+    template  => "myTemplates/list"
+  );
   return;
 }
 1;
